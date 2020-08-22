@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //1.不能重复声明
+        // let a = 100;
+        // let a = 200;//重复声明
+        // const a = 1;
+        // const a = 2;
+        //2.let 变量可以修改，const不可以修改
+        let a = 100;
+        a = 111;
+        console.log(a);
+        const b = 200;
+        //b  = 300;//报错:const声明常量，不能重新赋值
+        console.log(b);
+
+        //3.块级作用域
+        if(true){
+            const name = "迪丽热巴";
+        }
+        console.log(name);
+    </script>
+</body>
+</html>

@@ -1,13 +1,5 @@
 # hello-es6
 
-ES6 各种新语法 入门了解  
-
-视频地址
-
-- [b站：深入解读ES6系列](https://www.bilibili.com/video/av20327829/)
-
-看视频整理要点笔记:
-
 ----
 
 - [hello-es6](#hello-es6)
@@ -45,6 +37,7 @@ ES6 各种新语法 入门了解
 ## 2.ES6兼容性
 
 - ES6(ES2015) 支持的环境 IE10+, Chrome, FireFox, 移动端, NodeJS
+
 - 解决不兼容办法，编译、转换
     - 在线转换
     - 或者提前编译
@@ -54,6 +47,10 @@ ES6 各种新语法 入门了解
     - Babel 是一个 JavaScript 编译器
     - 一个广泛使用的转码器，可以将ES6代码转为ES5代码，从而在现有环境执行
     - 现在就用 ES6 编写程序，而不用担心现有环境是否支持
+    
+    参考网站: http://kangax.github.io/compat-table/es5/
+    
+    ​                 http://kangax.github.io/compat-table/es6/
 
 ## 3.变量 let 和 常量 const
 
@@ -61,13 +58,50 @@ ES6 各种新语法 入门了解
     - 可以重复声明，没有报错和警告
     - 无法限制修改
     - 没有块级作用域， `{ }`
-
+- 案例：
+    
+    ```html
+    <script>
+        var a = 100;
+        var a = 200;//重复声明
+        alert(a);
+        if(true){
+            var b = 300;
+        }
+        alert("b=="+b)//没有块级作用域
+    </script>
+    ```
+    
 - let 和 const
     - 不能重复声明
     - 都是块级作用域, `{ }` 块内声明的，块外无效
     - let 是变量，可以修改
     - const 是常量，不能修改
-
+- 案例：
+    
+    ```html
+    <script>
+        //1.不能重复声明
+        // let a = 100;
+        // let a = 200;//重复声明
+        // const a = 1;
+        // const a = 2;
+        //2.let 变量可以修改，const不可以修改
+        let a = 100;
+        a = 111;
+        console.log(a);
+        const b = 200;
+        //b  = 300;//报错:const声明常量，不能重新赋值
+        console.log(b);
+    
+        //3.块级作用域
+        if(true){
+            const name = "迪丽热巴";
+        }
+        console.log(name);
+    </script>
+    ```
+    
 - 块级作用域举例
     - 原来用 var 的方式，结果弹出的都是 3
     - 或者将变量 封装到函数里，限制作用域，但比较麻烦
@@ -156,6 +190,27 @@ console.log(show4(10))
 console.log(show5(10))
 ```
 
+箭头函数案例：
+
+```javascript
+<script>
+    let arr = [12,5,8,99,33,14,26];
+	/*
+        arr.sort(function(n1,n2){
+            return n1 - n2;
+        });
+
+       arr.sort( (n1,n2)=> {
+           return n1 - n2;
+       })
+       */
+arr.sort( (n1,n2) => n1 - n2);
+alert(arr);
+</script>
+```
+
+
+
 ## 5.函数-参数
 
 - 参数扩展／展开 `...args`
@@ -164,41 +219,50 @@ console.log(show5(10))
 - 默认参数
 
 ```js
+//1.收集剩余参数
 function show(a, b, ...args) {
     console.log(a)
     console.log(b)
     console.log(args)
 }
 console.log(show(1, 2, 3, 4, 5))
-
+//2.展开数组:展开后的效果和直接把数组的内容写在这儿一样
 let arr1 = [1, 2, 3]
 let arr2 = [4, 5, 6]
 let arr3 = [...arr1, ...arr2]
 console.log(arr3)
-
+//3.默认参数
 function show2(a, b=5, c=8) {
     console.log(a, b, c)
 }
+show2(88)
 show2(88, 12)
+show2(88,12,100)
 ```
 
 ## 6.解构赋值
 
+解构赋值的要求：
+
+- 左右两个边结构必须一样
+- 右边必须是个东西
+- 声明和赋值赋值不能分开，必须在一句话里
+- 声明和赋值必须放在一行
+
 ```js
-let [a, b, c] = [1, 2, 3]
+let [a, b, c] = [1, 2, 3] //1.数组解构赋值
 console.log(a, b, c)
 
-let {x, y, z} = {x: 1, y: 2, z: 3}
+let {x, y, z} = {x: 1, y: 2, z: 3}//2.json解构赋值
 console.log(x, y, z)
 
+let [{a,b}, [n1,n2,n3], num, str] = [{ a: 1, b: 2 }, [1, 2, 3], 8, 'str']
+console.log(a,b,n1,n2,n3,num,str)
 let [json, arr, num, str] = [{ a: 1, b: 2 }, [1, 2, 3], 8, 'str']
-console.log(json, arr, num, str)
+console.log(json, arr, num, str)//json={a:1,b:2}, arr=[1,2,3]
 ```
 
-- 解构赋值
-    - 左右两个边结构必须一样
-    - 右边必须是个东西
-    - 声明和赋值赋值不能分开，必须在一句话里
+
 
 ## 7.数组
 
