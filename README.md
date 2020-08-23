@@ -580,6 +580,8 @@ Promise.all([p1, p2, p3]).then(function (results) {
     - Promse.race就是赛跑的意思
     - 哪个结果获得的快，就返回那个结果
     - 不管结果本身是成功状态还是失败状态
+    
+    [Promis案例](5.promise示例.html)
 
 ## 13.generator-认识生成器函数
 
@@ -632,8 +634,8 @@ var gen = show()
 gen.next() // 1
 gen.next() // 2 和 undefined 因为没有传参，yield没有返回值
 var gen = show()
-gen.next(10) // 1 第一次执行到yield，但没有执行赋值
-gen.next(20) // 2 和 20
+gen.next(10) // 1 第一次执行到yield，但没有执行赋值，没有把10传给yield
+gen.next(20) // 2 和 20；第二次才把20传给yield
 
 function* show2() {
     console.log('1')
@@ -647,11 +649,27 @@ console.log(res1) // { value: 10, done: false }
 var res2 = gen.next()
 console.log(res2)
 // { value: undefined, done: true } 最后的value需要return返回
+//如果函数有返回值，value就是函数的返回值。
+```
+
+生活案例:
+
+```js
+<script>
+    function *炒菜(菜市场买回来的){
+    	洗菜--> 洗好的菜
+    	let 干净的菜 = yield 洗好的菜;
+    	干净的菜->切->丝
+    	let 切好的菜 = yield 丝
+        切好的菜->炒->熟的菜
+    	return 熟的菜;
+}
+</script>
 ```
 
 ## 15.generator-实例
 
-- Promise 适合一次读一组
+- Promise 适合一次读一堆
 - generator 适合逻辑性的
 
 ```js
@@ -668,7 +686,7 @@ runner(function * () {
 ```
 
 ```js
-// yield 实例，用同步方式写异步
+// yield 实例，用同步方式写异步 koa模块 node.js运行查询mysql
 server.use(function * () {
     let data = yield db.query(`select * from user_table`)
     this.body = data
@@ -679,9 +697,9 @@ server.use(function * () {
 
 - 数组
     - `arr.includes()` 数组是否包含某个东西
-    - 数组的 arr.keys(), arr,entries()
-    - for ... in 遍历数组 下标 key
-    - for ... of 遍历数组 值 value, 不能用于json
+    - 数组的 arr.keys(),arr.values(),arr.entries()
+    - for ... in 遍历数组下标 key
+    - for ... of 遍历数组值value, 不能用于json
 
 ```js
 let arr = ['a', 'b', 'c']
@@ -695,10 +713,10 @@ for (let i of arr) {
     console.log(i) // 循环的是值 value
 }
 for (let i of arr.keys()) {
-    console.log('>'+i)
+    console.log('>'+i)  //循环的时下标 key
 }
 for (let [key, value] of arr.entries()) {
-    console.log('>' + key + value)
+    console.log('>' + key + value) //0--a, 1--b, 2--c
 }
 
 let json = { a: 12, b: 5, c: 7 }
@@ -724,6 +742,7 @@ console.log('=' + 'abcd'.padEnd(6, '0') + '=')
 - async await
     - 和 generator yield 类似
     - generator 不可以写成箭头函数， async 可以
+    - async不再依赖runner外部资源，标准支持
 
 ```js
 async function show() {
@@ -732,3 +751,31 @@ async function show() {
     console.log(2)
 }
 ```
+
+async异步读取数据
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery-3.5.1/jquery-3.5.1.min.js" charset="utf8"></script>
+    <script>
+        async function readData(){
+            console.log("111111");
+            let data1 = await $.ajax({url:"data/1.txt",dataType:'json'});
+            let data2 = await $.ajax({url:"data/2.txt",dataType:'json'});
+            let data3 = await $.ajax({url:"data/3.txt",dataType:'json'});
+            console.log(data1,data2,data3);
+        }
+        readData();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
+```
+
