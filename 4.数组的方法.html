@@ -13,7 +13,31 @@
         });
         let result2 = arr.map(item => item * 2);
         let result3 = arr.map(item => item >= 60 ? "及格" : "不及格");
-        alert(result3);
+
+        //reduce方法
+        var arr2 = [1,3,5,7,9];
+        var result4 = arr2.reduce(function(temp,item,index){
+            console.log(temp,item,index);
+            return temp + item;
+        });
+        console.log("最终结果:"+result4);
+        var result5 = arr2.reduce(function(temp,item,index){
+            console.log("index = " +index);
+            if(index != arr2.length-1){
+                return temp + item;
+            }else{
+                console.log("temp=="+temp+",item=="+item);
+                return (temp + item)/arr2.length;
+            }
+        });
+        console.log("平均值:"+result5);
+
+        var arr3 = [
+            { title: '苹果', price: 10 },
+            { title: '西瓜', price: 20 },
+        ]
+        var result6 = arr3.filter(json => json.price >= 20)
+        console.log(result6[0].title)
     </script>
 </body>
 </html>

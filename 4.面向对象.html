@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class User {
+            constructor(name, pass) {
+                this.name = name
+                this.pass = pass
+            }
+
+            showName() {
+                console.log(this.name)
+            }
+            showPass() {
+                console.log(this.pass)
+            }
+        }
+
+        var u1 = new User('无忌哥哥', '111')
+        u1.showName()
+        u1.showPass()
+
+        // 新版本继承
+        class VipUser extends User {
+            constructor(name, pass, level) {
+                super(name, pass)
+                this.level = level
+            }
+            showLevel(){
+                console.log(this.level)
+            }
+        }
+
+        v1 = new VipUser('blue', '123', 3)
+        v1.showLevel()
+    </script>
+</body>
+</html>

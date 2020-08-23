@@ -59,7 +59,7 @@
     - 无法限制修改
     - 没有块级作用域， `{ }`
 - 案例：
-    
+  
     ```html
     <script>
         var a = 100;
@@ -78,7 +78,7 @@
     - let 是变量，可以修改
     - const 是常量，不能修改
 - 案例：
-    
+  
     ```html
     <script>
         //1.不能重复声明
@@ -455,6 +455,8 @@ v1.showLevel()
     - 用于构建用户界面的 JavaScript 库
     - 组件化，一个组件就是一个 class
     - JSX == bable == browser.js
+    
+    
 
 ## 11.json
 
@@ -495,9 +497,9 @@ http://www.xx.com/%7B%22a%22%3A12%2C%22b%22%3A5%7D
     - in 运算符用于检查对象是否包含某个属性（注意，检查的是键名，不是键值
     - for...in循环用来遍历一个对象的全部属性
 
-- 对象 简写
+- json对象的简写
     - key-value 一样时可以简写
-    - 里面函数可以简写, 去掉
+    - 里面函数可以简写, 去掉名字
 
 ```js
 var a = 12, b = 5
@@ -523,13 +525,14 @@ console.log({ a, b, show(){ console.log('a') }})
     - 改善了可读性，对于多层嵌套的回调函数很方便
     - 充当异步操作与回调函数之间的中介，使得异步操作具备同步操作的接口
 
-- Promise 也是一个构造函数
+- Promise 也有一个构造函数
     - 接受一个回调函数f1作为参数，f1里面是异步操作的代码
     - 返回的p1就是一个 Promise 实例
     - 所有异步任务都返回一个 Promise 实例
     - Promise 实例有一个then方法，用来指定下一步的回调函数
 
 ```js
+//resolve表示成功了，reject表示失败了
 function f1(resolve, reject) {
   // 异步代码...
 }
